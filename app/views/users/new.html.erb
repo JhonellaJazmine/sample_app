@@ -1,3 +1,32 @@
 <% provide(:title, 'Sign up') %>
 <h1>Sign up</h1>
-<p>This will be a signup page for new users.</p>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_with(model: User, data: { turbo: false }) do |f| %>
+            <% if @user.errors.any? %>
+               <h2><%= pluralize(@user.errors.size, 'error') %> prevented this user from being created:</h2>
+               <ul>
+               <% @user.errors.full_messages.each do |msg| %>
+                   <li><%= msg %></li>
+               <% end %>
+               </ul>
+        <% end %>
+        
+        <%= f.label :name %>
+                <%= f.text_field :name, class: 'form-control' %>
+                
+                <%= f.label :email %>
+                <%= f.email_field :email, class: 'form-control' %>
+                
+                <%= f.label :password %>
+                <%= f.password_field :password, class: 'form-control' %>
+                
+                <%= f.label :password_confirmation, "Confirmation" %>
+                <%= f.password_field :password_confirmation, class: 'form-control' %>
+                
+                <%= f.submit "Create my account", class: "btn btn-primary" %>
+        <% end %>
+</div>
+</div>
+
